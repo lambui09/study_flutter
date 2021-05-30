@@ -5,11 +5,12 @@ void main() => runApp(new MaterialApp(home: new Application()));
 class Application extends StatefulWidget {
   @override
   _ApplicationState createState() => new _ApplicationState();
-
 }
-class _ApplicationState extends State<Application>{
 
-List<int> _items = new List();
+class _ApplicationState extends State<Application> {
+  String text = "lam bui";
+
+  List<int> _items = new List();
   @override
   void initState() {
     for (int i = 0; i < 50; i++) {
@@ -19,17 +20,31 @@ List<int> _items = new List();
 
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: GridView.builder(
-          itemCount: _items.length,
-          gridDelegate:
-              new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
-          itemBuilder: (BuildContext context, int index) {
-            return new Card(
-              color: Colors.blue,
-              child: new Padding(padding: const EdgeInsets.all(20.0)),
-            );
-          }),
+      appBar: new AppBar(
+        backgroundColor: Colors.green,
+        title: new Text("Bui Duc Lam"),
+        leading: new Icon(Icons.menu),
+        centerTitle: true,
+        actions: <Widget>[
+          new IconButton(
+              icon: new Icon(Icons.arrow_forward),
+              onPressed: () {
+                setState(() {
+                  text = "text test";
+                });
+              }),
+          new IconButton(
+              icon: new Icon(Icons.close),
+              onPressed: () {
+                setState(() {
+                  text = "close buttom";
+                });
+              })
+        ],
+      ),
+      body: new Center(
+        child: new Text(text),
+      ),
     );
   }
 }
-
