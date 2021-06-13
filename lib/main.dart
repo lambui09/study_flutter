@@ -7,8 +7,10 @@ class Application extends StatefulWidget {
   _ApplicationState createState() => new _ApplicationState();
 }
 
-class _ApplicationState extends State<Application> {
+class _ApplicationState extends State<Application>
+    with TickerProviderStateMixin {
   String text = "lam bui";
+  TabController tabController, control;
 
   List<int> _items = new List();
   @override
@@ -16,6 +18,9 @@ class _ApplicationState extends State<Application> {
     for (int i = 0; i < 50; i++) {
       _items.add(i);
     }
+    tabController = TabController(length: 3, vsync: this);
+
+    control = TabController(length: 3, vsync: this);
   }
 
   Widget build(BuildContext context) {
@@ -41,9 +46,47 @@ class _ApplicationState extends State<Application> {
                 });
               })
         ],
+        bottom: TabBar(
+          tabs: <Widget>[
+            Tab(
+              icon: Icon(Icons.home),
+            ),
+            Tab(
+              icon: Icon(Icons.supervisor_account),
+            ),
+            Tab(
+              icon: Icon(Icons.close),
+            ),
+          ],
+          controller: control,
+        ),
       ),
-      body: new Center(
-        child: new Text(text),
+      body: new TabBarView(
+        controller: control,
+        children: <Widget>[
+          Center(
+            child: Text("Welcome to home"),
+          ),
+          Center(
+            child: Text("Welcome to user account"),
+          ),
+          Center(
+            child: Text("Welcome to close"),
+          ),
+        ],
+      ),
+
+
+      bottomNavigationBar: Material(
+        color: Colors.red,
+        child: TabBar(
+          controller: control,
+          tabs: <Widget>[
+            Tab(icon: Icon(Icons.home),),
+            Tab(icon: Icon(Icons.support_agent_rounded),),
+            Tab(icon: Icon(Icons.close),)
+          ],
+        ),
       ),
     );
   }
