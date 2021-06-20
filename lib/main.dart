@@ -1,50 +1,21 @@
 import 'package:flutter/material.dart';
+import 'custom_view.dart';
 
 void main() => runApp(new MaterialApp(home: new Application()));
 
-class Application extends StatefulWidget {
+class Application extends StatelessWidget {
   @override
-  _ApplicationState createState() => new _ApplicationState();
-}
-
-class _ApplicationState extends State<Application> {
-  String text = "lam bui";
-
-  List<int> _items = new List();
-  @override
-  void initState() {
-    for (int i = 0; i < 50; i++) {
-      _items.add(i);
-    }
-  }
-
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        backgroundColor: Colors.green,
-        title: new Text("Bui Duc Lam"),
-        leading: new Icon(Icons.menu),
-        centerTitle: true,
-        actions: <Widget>[
-          new IconButton(
-              icon: new Icon(Icons.arrow_forward),
-              onPressed: () {
-                setState(() {
-                  text = "text test";
-                });
-              }),
-          new IconButton(
-              icon: new Icon(Icons.close),
-              onPressed: () {
-                setState(() {
-                  text = "close buttom";
-                });
-              })
-        ],
-      ),
-      body: new Center(
-        child: new Text(text),
+    // TODO: implement build
+    return MaterialApp(
+      title: 'Custom view',
+      home: Scaffold(
+        body: customView(),
       ),
     );
   }
 }
+
+// Widget customView() {
+//   return new IconButton(icon: new Icon(Icons.next_plan), onPressed: () {});
+// }
