@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'home.dart';
 
 void main() => runApp(new MaterialApp(home: new Application()));
 
@@ -25,22 +26,39 @@ class _ApplicationState extends State<Application> {
         title: new Text("Bui Duc Lam"),
         leading: new Icon(Icons.menu),
         centerTitle: true,
-        actions: <Widget>[
-          new IconButton(
-              icon: new Icon(Icons.arrow_forward),
-              onPressed: () {
-                setState(() {
-                  text = "text test";
-                });
-              }),
-          new IconButton(
-              icon: new Icon(Icons.close),
-              onPressed: () {
-                setState(() {
-                  text = "close buttom";
-                });
-              })
-        ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            UserAccountsDrawerHeader(
+              accountName: Text("Bui Duc Lam"),
+              accountEmail: Text("buiduclam09@gmail.com"),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.black,
+                child: Text("L"),
+              ),
+              decoration: BoxDecoration(color: Colors.orange),
+            ),
+            ListTile(
+              title: Text("Page 1"),
+              trailing: Icon(Icons.notifications_active_rounded),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => homePage("Hom page"),
+              )),
+            ),
+            ListTile(
+              title: Text("Page 2"),
+              trailing: Icon(Icons.alarm),
+            ),
+            ListTile(
+              title: Text("Close"),
+              trailing: Icon(Icons.close),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
       ),
       body: new Center(
         child: new Text(text),
