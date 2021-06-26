@@ -12,6 +12,7 @@ class _ApplicationState extends State<Application> {
   String text = "lam bui";
 
   List<int> _items = new List();
+  final GlobalKey<ScaffoldState> _skey = GlobalKey();
   @override
   void initState() {
     for (int i = 0; i < 50; i++) {
@@ -19,8 +20,14 @@ class _ApplicationState extends State<Application> {
     }
   }
 
+  void showSnackBar() {
+    _skey.currentState
+        .showSnackBar(SnackBar(content: Text("Internet not connect")));
+  }
+
   Widget build(BuildContext context) {
     return new Scaffold(
+      key: _skey,
       appBar: new AppBar(
         backgroundColor: Colors.green,
         title: new Text("Bui Duc Lam"),
@@ -61,7 +68,10 @@ class _ApplicationState extends State<Application> {
         ),
       ),
       body: new Center(
-        child: new Text(text),
+        child: new RaisedButton(
+          onPressed: () => showSnackBar(),
+          child: Text("Internet no connect"),
+        ),
       ),
     );
   }
