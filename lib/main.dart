@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
+import 'answer.dart';
+import 'question.dart';
 
 void main() => runApp(new MaterialApp(home: new Application()));
 
@@ -10,6 +12,28 @@ class Application extends StatefulWidget {
 
 class _ApplicationState extends State<Application> {
   String text = "lam bui";
+  var questions = [
+    {
+      'questionText': 'What\'s your favorite color?',
+      'answers': ['Black', 'Red', 'Green', 'White']
+    },
+    {
+      'questionText': 'What\'s your favorite animal?',
+      'answers': ['Dog', 'Cat', 'Buffelow', 'fish']
+    },
+    {
+      'questionText': 'What\'s your favorite instructor?',
+      'answers': ['Max', 'Min', 'Large', 'Big']
+    },
+  ];
+  var _questionIndex = 0;
+  final Function() a = null;
+  void _answerQuestion() {
+    setState(() {
+      _questionIndex = _questionIndex + 1;
+      print(_questionIndex);
+    });
+  }
 
   List<int> _items = new List();
   final GlobalKey<ScaffoldState> _skey = GlobalKey();
@@ -22,7 +46,7 @@ class _ApplicationState extends State<Application> {
 
   void showSnackBar() {
     _skey.currentState
-        .showSnackBar(SnackBar(content: Text("Internet not connect")));
+        ?.showSnackBar(SnackBar(content: Text("Internet not connect")));
   }
 
   Widget build(BuildContext context) {
@@ -67,12 +91,17 @@ class _ApplicationState extends State<Application> {
           ],
         ),
       ),
-      body: new Center(
-        child: new RaisedButton(
-          onPressed: () => showSnackBar(),
-          child: Text("Internet no connect"),
-        ),
-      ),
+      body: new Column(children: [
+        Question(questions[_questionIndex]['questionText'] as String),
+        // for (var i = 0; i < 4; i++)
+        //   {
+
+        //   }
+        ...(questions[0]['answers'] as List<String>).map((it) {
+          print(it);
+          return Answer(a, it);
+        }).toList()
+      ]),
     );
   }
 }
